@@ -8,8 +8,9 @@
         Dim bol As Boolean
 
         Do
+
             Console.Clear()
-            Console.WriteLine("============ PLAYER {0} ============", currentPlayer)
+            Console.WriteLine("============ Jogador {0} ============", currentPlayer)
             Console.WriteLine("")
             guessNumber = readNumber("Digite o número a ser adivinhado: ")
             Console.Clear()
@@ -20,8 +21,6 @@
                 bol = Guess(guessNumber, 1)
             End If
 
-
-
         Loop Until (bol)
 
         Console.ReadKey()
@@ -29,31 +28,40 @@
 
 
     ' Função principal do jogo
-    ' Recebe como parâmetros o número a ser adivinhado e jogador que vai tentar adivinhar
-    ' Retorna False caso o jogo deva continuar, e True caso o jogo deva parar
-    Function Guess(gnum As String, player As Integer) As Boolean
-        Dim tries, correctNums As Integer
-        Dim guessing_number As String
+    ' @params toguess -> Número a ser adivinhado
+    ' @params player -> Jogador que vai tentar adivinhar
+    ' @Retorna False caso o jogo deva continuar
+    ' @Retorna True caso o jogo deva parar
+    Function Guess(toguess As String, player As Integer) As Boolean
         Dim flag As Boolean = False
-
-        Dim show(5) As Char
-
+        Dim tries, correctNums As Integer
+        Dim tryguess, failedPositions As String
+        Dim show(5), tryGuessArray(5) As Char
         tries = 0
 
         Do
 
+            ' Nesta variável vamos armazenar todos os números que o utilizador introduziu numa posição errada
+            failedPositions = ""
+
             Console.Clear()
 
+            ' Nas seguintes linhas, para tornar tudo muito mais bonitinho e amigo, vamos simplesmente mostrar diretamente a animaçãO
+            ' (Basicamente cancelamos a animação, passando o '0' para o threading.thread.sleep())
             If (tries <> 0) Then
                 showGuessingAnimation(show, 0)
             End If
 
 
             Console.WriteLine("Tentativa {0}", tries + 1)
-            guessing_number = readNumber("Player " + player.ToString + ", por favor digite um número: ")
+            tryguess = readNumber("Player " + player.ToString + ", por favor digite um número: ")
+
+            ' Passamos todos os númerors digitados para um array de caracteres
+            ' Assim, será muito mais simples fazer a verificação dos números
+            tryGuessArray = tryguess.ToCharArray()
             Console.WriteLine()
 
-            If (guessing_number = gnum) Then ' O jogador acertou!
+            If (tryguess = toguess) Then ' O jogador acertou!
                 flag = True
             Else ' O jogador não acertou
                 tries += 1
@@ -61,19 +69,36 @@
 
                 ' Verifica se o utilizador acertou em algum algarismo :)
                 For i As Integer = 0 To 4
-                    If (gnum.ToCharArray()(i) = guessing_number.ToCharArray()(i)) Then
+
+                    If (toguess.ToCharArray()(i) = tryGuessArray(i)) Then
                         correctNums += 1
-                        show(i) = gnum.ToCharArray()(i)
+                        show(i) = toguess.ToCharArray()(i)
                     Else
+
+                        ' Caso o uilizador acerte num número mas numa posição diferente vai adicionar à string
+                        If (toguess.Contains(tryGuessArray(i))) Then
+                            failedPositions += tryGuessArray(i) + " "
+                        End If
+
+                        ' Caso o jogador não tenha acertado nada vai preencher tudo com "X"
+                        ' Coitadinho do jogador :(
                         show(i) = "X"
                     End If
+
                 Next
 
                 ' Caso o utilizador não tenha acertado em nenhuma posição :(
                 If (correctNums = 0) Then
                     Console.WriteLine("Não acertou em nenhuma posição")
                 Else
+                    ' Vai renderizar a animação pipi, em 4,5 segundos (450 ms)
                     showGuessingAnimation(show, 450)
+                End If
+
+                Console.WriteLine("")
+
+                If (failedPositions <> "") Then
+                    Console.WriteLine("Números em que errou a posição: " + failedPositions)
                 End If
 
                 Console.WriteLine()
@@ -84,22 +109,29 @@
         Loop Until (tries = 10 Or flag)
 
         Console.Clear()
+
         ' Caso o jogador tenha adivinhado o númearo
         If (flag = True) Then
 
-            Console.WriteLine("Parabéns! Você adivinhou!")
+            Console.WriteLine()
+            Console.WriteLine("       Parabéns! Você adivinhou!")
+            Console.WriteLine()
+            Console.Write("Clique Enter para continuar")
+            Console.ReadKey()
 
-            ' Caso o 1º jogador ganhe, vamos mudar para o próximo, defenindo a variável player1 e current player e retornar True, para indica que este ganhou
+            ' Caso o 1º jogador ganhe, vamos mudar para o próximo
+            ' currentPlayer -> passa  a ser o 2 
             If (currentPlayer = 1) Then
                 player1 = True
                 currentPlayer = 2
                 Return False
-            Else 'O mesmo processor será executado, mas para caso seja o 2º jogador
+            Else
+                'O mesmo processo será executado, mas para caso seja o 2º jogador
                 player2 = True
             End If
         Else
             Console.WriteLine("Acabaram-se as tentativas, perdeu o jogo!")
-            Console.WriteLine("A sequência correta era: {0}", gnum)
+            Console.WriteLine("A sequência correta era: {0}", toguess)
             Console.ReadKey()
 
             If (currentPlayer = 1) Then
@@ -112,7 +144,8 @@
         End If
 
         Console.Clear()
-        ' Vencedor
+
+        ' Vai mostrar quem ganhou e quem perdeu
         If (player1 And player2) Then
             Console.WriteLine("Foi um empate!")
         ElseIf (player1) Then
@@ -124,13 +157,14 @@
         End If
 
         'Verificar se os jogadores querem jogar de novo e caso o return seja true, vamos continuar...
-        If (wannaAnother()) Then 'wannaAnother() está na linha 144
+        If (wannaAnother()) Then
             currentPlayer = 1
             Return False
         Else
             Return True
         End If
 
+        ' Por defeito vai retornar False
         Return False
 
     End Function
@@ -138,7 +172,7 @@
     ' Lê o número a ser adivinhado
     Function readNumber(message As String) As String
         Dim i As String
-        Dim a As Integer
+        Dim typed As Integer
         Dim flag As Boolean = True
         Do
             Try
@@ -147,14 +181,16 @@
                 i = Console.ReadLine()
 
                 Try
-                    a = CInt(i)
+                    ' Com esta variável "typed" vamos converter e armazenar o número digitado para Integer
+                    typed = CInt(i)
                 Catch ex As Exception
                     flag = False
                     Console.WriteLine("Digite apenas números")
-
                 End Try
+
                 ' Vamos verificar se a length do número é diferente de 5 
-                If (i.Length <> 5) Then ' Sim, okay, podiamos estar neste momento a converter para uma string e bla bla bla, mas como somos reles programadores experientes declaramos como String
+                ' Sim, okay, podiamos estar neste momento a converter para uma string e bla bla bla, mas como somos reles programadores experientes declaramos como String
+                If (i.Length <> 5) Then
                     flag = False
                     Console.WriteLine("O número deverá conter 5 digitos")
                     Console.ReadKey()
@@ -182,8 +218,14 @@
 
                 If (i.ToLower = "s" Or i.ToLower() = "sim") Then
                     ret = True
-                Else
+                    flag = True
+                ElseIf (i.ToLower = "n" Or i.ToLower() = "não" Or i.ToLower() = "nao") Then
                     ret = False
+                    flag = True
+                Else
+                    ' Vamos mostrar que o jogador introduziu uma resposta errada
+                    Console.WriteLine("")
+                    flag = False
                 End If
             Catch ex As Exception
                 flag = False
@@ -196,6 +238,7 @@
         Return ret
     End Function
 
+    ' Temos aqui um procedimento que simplesmente vai carregar a animação pipi
     Sub showGuessingAnimation(vect() As Char, time As Integer)
         Dim line As String = "        "
 
