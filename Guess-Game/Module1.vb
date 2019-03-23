@@ -36,13 +36,15 @@
         Dim flag As Boolean = False
         Dim tries, correctNums As Integer
         Dim tryguess, failedPositions As String
-        Dim show(5), tryGuessArray(5) As Char
+        Dim show(5), tryGuessArray(5), ToGuessArray(5) As Char
         tries = 0
 
         Do
 
             ' Nesta variável vamos armazenar todos os números que o utilizador introduziu numa posição errada
             failedPositions = ""
+
+            ToGuessArray = toguess.ToCharArray
 
             Console.Clear()
 
@@ -73,18 +75,21 @@
                     If (toguess.ToCharArray()(i) = tryGuessArray(i)) Then
                         correctNums += 1
                         show(i) = toguess.ToCharArray()(i)
+                        ToGuessArray(i) = "Z"
                     Else
-
-                        ' Caso o uilizador acerte num número mas numa posição diferente vai adicionar à string
-                        If (toguess.Contains(tryGuessArray(i))) Then
-                            failedPositions += tryGuessArray(i) + " "
-                        End If
 
                         ' Caso o jogador não tenha acertado nada vai preencher tudo com "X"
                         ' Coitadinho do jogador :(
                         show(i) = "X"
                     End If
 
+                Next
+
+                For i As Integer = 0 To 4
+                    ' Caso o uilizador acerte num número mas numa posição diferente vai adicionar à string
+                    If (ToGuessArray.Contains(tryGuessArray(i))) Then
+                        failedPositions += tryGuessArray(i) + " "
+                    End If
                 Next
 
                 ' Caso o utilizador não tenha acertado em nenhuma posição :(
@@ -120,7 +125,7 @@
             Console.ReadKey()
 
             ' Caso o 1º jogador ganhe, vamos mudar para o próximo
-            ' currentPlayer -> passa  a ser o 2 
+            ' currentPlayer -> passa  a ser o 2
             If (currentPlayer = 1) Then
                 player1 = True
                 currentPlayer = 2
@@ -188,7 +193,7 @@
                     Console.WriteLine("Digite apenas números")
                 End Try
 
-                ' Vamos verificar se a length do número é diferente de 5 
+                ' Vamos verificar se a length do número é diferente de 5
                 ' Sim, okay, podiamos estar neste momento a converter para uma string e bla bla bla, mas como somos reles programadores experientes declaramos como String
                 If (i.Length <> 5) Then
                     flag = False
