@@ -1,6 +1,6 @@
 # Guess-The-Number
 
-Hello HitHub world! 🌈✌
+Hello GitHub world! 🌈✌
 
 This is thee game "Guess-The-Number", original name, isn't it?
 
