@@ -29,5 +29,4 @@ See ya, and remember to spend time with those who are different
 # 'Cause it's good to be different
 
 
-www.se3me.com
-www.solutions.se3me.com
+www.se3me.com || www.solutions.se3me.com
