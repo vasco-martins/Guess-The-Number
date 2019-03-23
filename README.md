@@ -1,6 +1,7 @@
 # Guess-The-Number
 
 Hello HitHub world! 🌈✌
+
 This is thee game "Guess-The-Number", original name, isn't it?
 
 ## What the heck is this? ❓
@@ -23,7 +24,8 @@ You can send to:
 * *vasco@se3me.com
 * *miguel@se3me.com
 
-# See ya, and remember to spend time with those who need
+See ya, and remember to spend time with those who are different
+
 # 'Cause it's good to be different
 
 
