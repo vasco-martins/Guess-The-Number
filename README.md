@@ -21,13 +21,13 @@ Good luck warriors!
 We'd love if you, there, in the other side of the computer send us some suggestions, or even some code of yours based on ours!
 You can send to:
 
-* *vasco@se3me.com
-* *miguel@se3me.com
+* vasco@se3me.com
+* miguel@se3me.com
 
 See ya, and remember to spend time with those who are different
 
 # 'Cause it's good to be different
 
 
-*www.se3me.com
-*www.solutions.se3me.com
+www.se3me.com
+www.solutions.se3me.com
