@@ -19,3 +19,14 @@ C:\Users\31115286\Desktop\Guess-Game\Guess-Game\bin\Debug\Guess-Game.pdb
 C:\Users\31115286\Desktop\Guess-Game\Guess-Game\bin\Debug\Guess-Game.xml
 C:\Users\31115286\Desktop\Guess-Game\Guess-Game\obj\Debug\Guess-Game.vbprojAssemblyReference.cache
 C:\Users\31115286\Desktop\Guess-Game\Guess-Game\obj\Debug\Guess-Game.vbproj.CoreCompileInputs.cache
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\bin\Debug\Guess-Game.exe.config
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\bin\Debug\Guess-Game.exe
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\bin\Debug\Guess-Game.pdb
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\bin\Debug\Guess-Game.xml
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\obj\Debug\Guess-Game.vbprojAssemblyReference.cache
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\obj\Debug\Guess_Game.Resources.resources
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\obj\Debug\Guess-Game.vbproj.GenerateResource.cache
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\obj\Debug\Guess-Game.vbproj.CoreCompileInputs.cache
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\obj\Debug\Guess-Game.exe
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\obj\Debug\Guess-Game.xml
+C:\Users\migue\Desktop\Guess-The-Number-master\Guess-Game\obj\Debug\Guess-Game.pdb
